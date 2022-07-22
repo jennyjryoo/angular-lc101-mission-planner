@@ -1,3 +1,4 @@
+import { style } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -27,5 +28,29 @@ export class EquipmentComponent implements OnInit {
    ngOnInit() { }
 
    // Code your addItem function here:
+   addItem (equipment) {
+      if (this.cargoMass >= 2000 || this.cargoMass+equipment.mass > 2000) {
+        return false;
+     } else {
+      this.cargoHold.push(equipment);
+      this.cargoMass += equipment.mass;
+       return true;
+     }
+   }
    
+   disable (equipment) {
+    if (this.cargoHold.length === this.maxItems) {
+      return true;
+    } else if (!((this.cargoMass+equipment.mass) <= 2000)) {
+      return true;
+    } else {
+      return false;
+    }
+   }
+
+   reset () {
+    this.cargoHold = [];
+    this.cargoMass = 0;
+   }
+
 }
